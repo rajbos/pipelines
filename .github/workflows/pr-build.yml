@@ -10,7 +10,7 @@ jobs:
   branch-build:
 
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/head/main'
+    #if: github.ref == 'refs/head/main'
 
     steps:
     - uses: actions/checkout@v1
@@ -51,7 +51,7 @@ jobs:
         uses: wei/curl@fccac89c423b5af5dca9b03b337670955ba52a81
         with:
           args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
-          
+
 
   webtest:
 
