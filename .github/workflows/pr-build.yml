@@ -32,24 +32,26 @@ jobs:
   deploy:
     runs-on: ubuntu-latest   
     needs: branch-build
-    # publish to Azure App Service so we can test it
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: rajbos-actions/webapps-deploy@v2
-      with: 
-        app-name: dotnetcorewebapp19 # Replace with your app name
-        publish-profile: ${{ secrets.publish_profile }} # Define secret variable in repository settings as per action documentation
-        package: './dotnetcorewebapp' 
-        
-    - name: Curl the website as a smoke test
-      uses: rajbos-actions/curl@61d92b5169ea0425820dd13cf6fbad66b483e9f1
-      with:
-        args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
-        
-    - name: Curl the website as a smoke test
-      uses: wei/curl@fccac89c423b5af5dca9b03b337670955ba52a81
-      with:
-        args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
-
+    
+    steps:
+      # publish to Azure App Service so we can test it
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: rajbos-actions/webapps-deploy@v2
+        with: 
+          app-name: dotnetcorewebapp19 # Replace with your app name
+          publish-profile: ${{ secrets.publish_profile }} # Define secret variable in repository settings as per action documentation
+          package: './dotnetcorewebapp' 
+          
+      - name: Curl the website as a smoke test
+        uses: rajbos-actions/curl@61d92b5169ea0425820dd13cf6fbad66b483e9f1
+        with:
+          args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
+          
+      - name: Curl the website as a smoke test
+        uses: wei/curl@fccac89c423b5af5dca9b03b337670955ba52a81
+        with:
+          args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
+          
 
   webtest:
 
