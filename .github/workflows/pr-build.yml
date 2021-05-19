@@ -83,7 +83,7 @@ jobs:
 
         # build the test project
         dotnet build --configuration Release ./src/dotnet-core-webapp.webtests
-        cd ./src/dotnet-core-webapp.webtests
+        cd ./dotnet-core-webapp.webtests
 
         # execute the tests
         dotnet test -l:trx
