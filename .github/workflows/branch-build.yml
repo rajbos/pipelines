@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  branch build:
+  branch-build:
 
     runs-on: ubuntu-latest
     if: github.ref == 'refs/head/main'
