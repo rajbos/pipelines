@@ -20,7 +20,8 @@ jobs:
       with:
         dotnet-version: 3.0.100
     
-    - run: cd ./src
-    - run: dotnet build --configuration Release ./dotnet-core-webapp/dotnetcore-webapp.csproj
+    - run: dotnet build --configuration Release ./src/dotnet-core-webapp/dotnetcore-webapp.csproj
       
-    - run: dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp
+    - run: |
+        cd .\src 
+        dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp
