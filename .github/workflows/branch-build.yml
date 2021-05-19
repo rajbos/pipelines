@@ -5,7 +5,6 @@ on:
 
   workflow_dispatch:
 
-
 jobs:
   branch-build:
 
@@ -15,6 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Hello world
-      run: echo 'Hello world!'
+    # install .NET core version
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
     
+    - run: cd ./src
+    - run: dotnet build --configuration Release ./dotnet-core-webapp/dotnetcore-webapp.csproj
+      
+    - run: dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp

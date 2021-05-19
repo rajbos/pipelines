@@ -1,0 +1,83 @@
+name: PR build
+
+on:
+  push: 
+
+  workflow_dispatch:
+
+
+jobs:
+  branch-build:
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/head/main'
+
+    steps:
+    - uses: actions/checkout@v1
+
+    # install .NET core version
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    
+    # dotnet build and publish
+    - name: Build with dotnet ${{ env.nameVar }}
+      run: |
+        dotnet build --configuration Release ./dotnet-core-webapp/dotnetcore-webapp.csproj
+      
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp
+
+  depploy:
+    runs-on: ubuntu-latest   
+    needs: branch-build 
+    # publish to Azure App Service so we can test it
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: rajbos-actions/webapps-deploy@v2
+      with: 
+        app-name: dotnetcorewebapp19 # Replace with your app name
+        publish-profile: ${{ secrets.publish_profile }} # Define secret variable in repository settings as per action documentation
+        package: './dotnetcorewebapp' 
+        
+    - name: Curl the website as a smoke test
+      uses: rajbos-actions/curl@61d92b5169ea0425820dd13cf6fbad66b483e9f1
+      with:
+        args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
+        
+    - name: Curl the website as a smoke test
+      uses: wei/curl@fccac89c423b5af5dca9b03b337670955ba52a81
+      with:
+        args: -X GET https://dotnetcorewebapp19.azurewebsites.net/
+
+
+  webtest:
+
+    runs-on: windows-latest
+    needs: build-and-deploy
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Web Test
+      run: |
+        # overwrite the AppSettings.json
+        $pathToFile = "./dotnet-core-webapp.webtests/AppSettings.json"
+        $fileContent = Get-Content $pathToFile
+        $fileContent = $fileContent.Replace("http://localhost/dotnetcore-webapp/", "https://dotnetcorewebapp19.azurewebsites.net/")
+        Set-Content $pathToFile $fileContent
+
+        # build the test project
+        dotnet build --configuration Release ./dotnet-core-webapp.webtests
+        cd ./dotnet-core-webapp.webtests
+
+        # execute the tests
+        dotnet test -l:trx
+
+    # Using the trx-parser action to pull the results of the webtests into GitHub
+    - name: Parse Trx files
+      uses: rajbos-actions/trx-parser@v0.0.5
+      id: trx-parser
+      with:
+        TRX_PATH: ${{ github.workspace }}\\dotnet-core-webapp.webtests\TestResults #This should be the path to your TRX files
+        REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
