@@ -39,6 +39,9 @@ jobs:
     needs: branch-build
     
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: webapp
       # publish to Azure App Service so we can test it
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: rajbos-actions/webapps-deploy@v2
