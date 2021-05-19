@@ -9,12 +9,12 @@ on:
 jobs:
   branch build:
 
-  runs-on: ubuntu-latest
-  if: github.ref == 'refs/head/main'
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/head/main'
 
-  steps:
-  - uses: actions/checkout@v1
+    steps:
+    - uses: actions/checkout@v1
 
-  - name: Hello world
-    run: echo 'Hello world!'
-  
+    - name: Hello world
+      run: echo 'Hello world!'
+    
