@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: webapp
-        path: src/dotnet-core-webapp
+        path: src/dotnetcorewebapp
 
   deploy:
     runs-on: ubuntu-latest   
