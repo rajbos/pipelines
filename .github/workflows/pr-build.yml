@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest   
-    needs: branch-build 
+    needs: branch-build
     # publish to Azure App Service so we can test it
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: rajbos-actions/webapps-deploy@v2
@@ -54,7 +54,7 @@ jobs:
   webtest:
 
     runs-on: windows-latest
-    needs: build-and-deploy
+    needs: deploy
 
     steps:
     - uses: actions/checkout@v1
