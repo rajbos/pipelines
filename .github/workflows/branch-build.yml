@@ -23,5 +23,5 @@ jobs:
     - run: dotnet build --configuration Release ./src/dotnet-core-webapp/dotnetcore-webapp.csproj
       
     - run: |
-        cd .\src 
+        cd ./src 
         dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp
