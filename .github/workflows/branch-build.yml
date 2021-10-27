@@ -13,7 +13,7 @@ jobs:
     environment: Demo
 
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v2.3.5
 
     # install .NET core version
     - name: Setup .NET Core
