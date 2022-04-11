@@ -29,7 +29,7 @@ jobs:
         dotnet publish -c Release -o dotnetcorewebapp ./dotnet-core-webapp
 
     - name: Upload artefact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: webapp
         path: src/dotnet-core-webapp
