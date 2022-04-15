@@ -13,7 +13,7 @@ jobs:
     #if: github.ref == 'refs/head/main'
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.1
 
     # install .NET core version
     - name: Setup .NET Core
@@ -73,7 +73,7 @@ jobs:
     needs: deploy
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v3.0.1
     - name: Run Web Test
       run: |
         cd ./src
