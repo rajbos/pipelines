@@ -12,7 +12,12 @@ jobs:
       - run: |
           cd $GITHUB_WORKSPACE # current directory in the repo, after the check out
           ls -la
+          
           cd .. # folder for this repository on the runner
           ls -la
-          cd ..
+          
+          cd .. # runner top dir
+          ls -la
+          
+          cd _actions
           ls -la
