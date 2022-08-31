@@ -1,0 +1,11 @@
+on: 
+  push:
+    paths:
+    - .github/workflows/check-downloads-from-actions.yml
+    
+ jobs:
+   job1:
+     runs-on: ubuntu-latest
+     steps: 
+       - uses: actions/checkout@v3
+       - run: echo "Hello aliens"
