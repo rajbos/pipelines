@@ -2,6 +2,7 @@ on:
   push:
     paths:
     - .github/workflows/check-downloads-from-actions.yml
+  workflow_dispatch:
     
 jobs:
   job1:
