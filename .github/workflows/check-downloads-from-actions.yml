@@ -20,7 +20,7 @@ jobs:
           ls -la
           
           cd _actions
-          ls -la                    
+          ls -la
           
       - uses: smartlyio/commit-status-action/create@master
         with:
