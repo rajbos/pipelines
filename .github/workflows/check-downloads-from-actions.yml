@@ -9,3 +9,6 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - run: echo "Hello aliens"
+      - run: |
+          cd $GITHUB_WORKSPACE
+          ls -la
