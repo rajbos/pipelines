@@ -1,7 +1,7 @@
 on: 
   push:
     paths:
-    - .github/workflows/check-downloads-from-actions.ym
+    - .github/workflows/check-downloads-from-actions.yml
     - .github/workflows/reusable-workflow.yml
     
   workflow_dispatch:
