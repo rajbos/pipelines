@@ -29,8 +29,10 @@ jobs:
       - uses: smartlyio/commit-status-action/create@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - uses: ./.github/workflows/reusable-workflow.yml
-        with: 
-          username: Testing
+       
+  # call reusable workflow
+  job2:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with: 
+      username: Testing
 
