@@ -5,9 +5,8 @@ on:
         required: true
         type: string
    
-   
- jobs:
+jobs:
   reusable-job1:
    runs-on: ubuntu-latest
    steps:
-      echo: ${{ inputs.username }} 
+     - run: echo "hi user: ${{ inputs.username }}"
