@@ -9,4 +9,4 @@ jobs:
   reusable-job1:
    runs-on: ubuntu-latest
    steps:
-     - run: echo "hi user: ${{ inputs.username }}"
+     - run: echo "hi user ${{ inputs.username }}"
