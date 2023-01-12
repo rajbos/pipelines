@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="4.6.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="107.0.5304.6200" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="109.0.5414.7400" />
   </ItemGroup>
 
   <ItemGroup>
