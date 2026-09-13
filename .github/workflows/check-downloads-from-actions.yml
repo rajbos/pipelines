@@ -1,0 +1,38 @@
+on: 
+  push:
+    paths:
+    - .github/workflows/check-downloads-from-actions.yml
+    - .github/workflows/reusable-workflow.yml
+    
+  workflow_dispatch:
+    
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      
+      - run: echo "Hello aliens"
+      - run: |
+          cd $GITHUB_WORKSPACE # current directory in the repo, after the check out
+          ls -la
+          
+          cd .. # folder for this repository on the runner
+          ls -la
+          
+          cd .. # runner top dir
+          ls -la
+          
+          cd _actions
+          ls -la
+          
+      - uses: smartlyio/commit-status-action/create@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+       
+  # call reusable workflow
+  job2:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with: 
+      username: Testing
+

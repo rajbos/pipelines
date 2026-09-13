@@ -1,0 +1,12 @@
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+   
+jobs:
+  reusable-job1:
+   runs-on: ubuntu-latest
+   steps:
+     - run: echo "hi user ${{ inputs.username }}"
